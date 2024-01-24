@@ -10,7 +10,6 @@ router.post('/signup',async(req,res)=>{
 
     try{
     await newUser.save();
-    console.log(`${name} and ${password} pushed successfully.`);
     res.json({noy:true})
     }catch(err){
       console.log(`error due to ${err}`);
@@ -20,7 +19,6 @@ router.post('/signup',async(req,res)=>{
 router.post('/login',async(req,res)=>{
     const {name,password} = req.body;
     const rlt = await userSchema.findOne({name,password});
-    console.log(rlt);
     res.json(rlt)
 });
 

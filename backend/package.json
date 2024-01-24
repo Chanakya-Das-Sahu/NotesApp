@@ -1,5 +1,4 @@
 {
-  "homepage": "https://Chanakya-Das-Sahu.github.io/NotesApp",
   "name": "backend",
   "version": "1.0.0",
   "description": "",
@@ -28,6 +27,7 @@
     "define-data-property": "^1.1.1",
     "depd": "^2.0.0",
     "destroy": "^1.2.0",
+    "dotenv": "^16.4.1",
     "ee-first": "^1.1.1",
     "encodeurl": "^1.0.2",
     "escape-html": "^1.0.3",
@@ -39,6 +39,7 @@
     "fresh": "^0.5.2",
     "function-bind": "^1.1.2",
     "get-intrinsic": "^1.2.2",
+    "gh-pages": "^6.1.1",
     "glob-parent": "^5.1.2",
     "gopd": "^1.0.1",
     "has-flag": "^3.0.0",
@@ -87,6 +88,7 @@
     "qs": "^6.11.0",
     "range-parser": "^1.2.1",
     "raw-body": "^2.5.2",
+    "react-scripts": "^5.0.1",
     "readdirp": "^3.6.0",
     "safe-buffer": "^5.2.1",
     "safer-buffer": "^2.1.2",
@@ -116,10 +118,9 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "start":"nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm install --production"
   },
   "author": "",
   "license": "ISC"
