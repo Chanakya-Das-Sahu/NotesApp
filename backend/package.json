@@ -1,4 +1,5 @@
 {
+  "homepage": "https://Chanakya-Das-Sahu.github.io/NotesApp",
   "name": "backend",
   "version": "1.0.0",
   "description": "",
@@ -115,6 +116,8 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "start":"nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
