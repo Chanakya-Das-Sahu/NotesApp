@@ -118,9 +118,10 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm install --production"
+    "start": "NODE_ENV=development nodemon index.js",
+    "start:prod": "NODE_ENV=production node index.js",
+    "test": "echo \"No tests specified\" && exit 0",
+    "build": "echo \"Add build steps if needed\""
   },
   "author": "",
   "license": "ISC"
