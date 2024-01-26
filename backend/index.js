@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const connectToMongo = require('./db.js');
 const userRoutes = require('./routes/userRoutes');
 const noteRoutes = require('./routes/noteRoutes'); // Import your noteRoutes
-const port = process.env.port;
+const port = process.env.port || 3000;
 
 const app = express();
 connectToMongo();
