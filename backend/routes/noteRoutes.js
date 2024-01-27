@@ -1,7 +1,7 @@
 const express = require('express');
 const noteSchema = require('../models/Note');
 const router = express.Router();
-
+const mongoose = require('mongoose');
 router.get('/getAll/:id',async(req,res)=>{
       const {id} = req.params ;
      const notes = await noteSchema.find({userID:id});
@@ -31,5 +31,14 @@ router.put('/edit/:id',async(req,res)=>{
   )
    res.json({noy:true})
 })
+
+router.delete('/delete/:id',async(req,res)=>{
+     const {id} = req.params ;
+try{ 
+     await noteSchema.findByIdAndDelete(id)
+ }catch(err){
+    console.log(`There is a problem with error ${err}`)
+ }
+    })
 
 module.exports = router ;

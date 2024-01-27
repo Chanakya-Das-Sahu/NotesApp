@@ -3,6 +3,7 @@ import './home.css';
 import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
+import {TiDelete} from 'react-icons/ti'
 const Home = () => {
   const [list, setList] = useState([]);
   const { id } = useParams();
@@ -18,7 +19,18 @@ const Home = () => {
     }
 
     getData();
-  }, [])
+  })
+  
+  const handleDelete = (e,id) =>{
+   
+    const fun = async () =>{
+    await axios.delete(`http://localhost:3000/note/delete/${id}`)
+   }
+   
+   fun();
+  
+   e.preventDefault();
+  }
 
   return (
     <>
@@ -32,6 +44,7 @@ const Home = () => {
               (list.map((ele) => (
                 <Link to={`/edit/${ele._id}`} className='block'>
                   <p>{ele.content}</p>
+                  <TiDelete onClick={(e)=>{handleDelete(e ,ele._id)}} />
                 </Link>
               )))
               

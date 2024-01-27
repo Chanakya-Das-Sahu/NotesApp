@@ -1,27 +1,49 @@
 import React, { useState } from 'react';
 import './signup.css';
-import { useNavigate} from 'react-router-dom';
+// import { useNavigate} from 'react-router-dom';
 import axios from 'axios';
-const Signup = () => {
-    const [data, setData] = useState({ name: '', password: '' });
-    const navigate = useNavigate();
-    const handleSignup = () => {
+import logo from './logo.png';
+import cross from './cross.png';
+const Signup = ({ setSignup }) => {
+    const [data, setData] = useState({ email: '', password: '' });
+    const [exist, setExist] = useState(false);
+    const handleSignup = async () => {
         try {
-        const res = axios.post('http://localhost:3000/user/signup',data);
-        if(res){
-          navigate('/login');
-        }
+            const res = await axios.post('http://localhost:3000/user/signup', data);
+
+            if (res.data.msg == 'found') {
+                setExist(true)
+            } else {
+
+            }
+
         } catch (err) {
             console.log(`signup failed due to ${err}`);
         }
     }
 
+    const handleCut = () => {
+        setSignup(false)
+    }
+
     return (
         <>
-            <input type="text" placeholder='name' name="name" onChange={(e) => { setData({...data,[e.target.name]: e.target.value }) }} />
-            <input type="text" placeholder='password' name="password" onChange={(e) => { setData({...data,[e.target.name]: e.target.value }) }} />
-            <button onClick={handleSignup}>Signup</button>
+            <div id='container'>
+                <img src={cross} id='cross' onClick={handleCut}></img>
+                <img src={logo} id='signup-logo'></img>
+                {exist &&
+                    <div id='red'>
+                        This email already exists
+                    </div>
+                }
+                <lable className='lable'>Enter Your Email </lable>
+                <input type="text" placeholder='email' name="email" onChange={(e) => { setData({ ...data, [e.target.name]: e.target.value }) }} />
+                <lable className='lable'>Enter Your Password</lable>
+                <input type="text" placeholder='password' name="password" onChange={(e) => { setData({ ...data, [e.target.name]: e.target.value }) }} />
+                <button onClick={handleSignup}>Signup</button>
+            </div>
         </>
+
     )
 }
 

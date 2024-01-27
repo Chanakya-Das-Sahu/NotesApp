@@ -118,7 +118,7 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "test": "echo \"No tests specified\" && exit 0",
     "build": "echo \"Add build steps if needed\""
   },
