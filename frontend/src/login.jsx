@@ -1,52 +1,21 @@
-// import React, { useState } from 'react';
-// import './login.css';
-// import {useNavigate} from 'react-router-dom';
-// import axios from 'axios';
-// const Login = () => {
-//     const [data, setData] = useState({ email: '', password: '' });
-//     const navigate = useNavigate();
-//     const handleLogin = async () => {
-//         try {
-
-//            const res = await axios.post('http://localhost:3000/user/login',data)
-//            const id = res.data._id;
-//            if(res){
-//             navigate(`/home/${id}`)
-//            }
-
-//         } catch (err) {
-//             console.log(`login failed due to ${err}`);
-//         }
-//     }
-
-//     return (
-//         <>
-//             <input type="text" placeholder='email' name="email" onChange={(e) => { setData({...data,[e.target.name]: e.target.value }) }} />
-//             <input type="text" placeholder='password' name="password" onChange={(e) => { setData({...data,[e.target.name]: e.target.value }) }} />
-//             <button onClick={handleLogin}>Login</button>
-//         </>
-//     )
-// }
-
-// export default Login;
-
 import React, { useEffect, useState } from 'react';
 import './login.css';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import logo from './logo.png';
 import cross from './cross.png';
-const Login = ({ setLogin , setId  }) => {
+import {addId} from './slice'
+import {useDispatch} from 'react-redux'
+const Login = ({ setLogin}) => {
     const [data, setData] = useState({ email: '', password: '' });
     const[showAlert , setShowAlert] = useState(false);
-    const navigate = useNavigate();
+    const dispatch = useDispatch();
     // const [exist, setExist] = useState(false);
     
     const handleLogin = async () => {
         try {
             const res = await axios.post('http://localhost:3000/user/login', data);
             if (res.data) {
-               setId(res.data._id)
+               dispatch(addId(res.data._id))
                setLogin(false)
             } else {
                  setShowAlert(true);
