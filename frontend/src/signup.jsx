@@ -4,7 +4,7 @@ import './signup.css';
 import axios from 'axios';
 import logo from './logo.png';
 import cross from './cross.png';
-const Signup = ({ setSignup }) => {
+const Signup = ({ setSignup , setLogin}) => {
     const [data, setData] = useState({ email: '', password: '' });
     const [exist, setExist] = useState(false);
     const handleSignup = async () => {
@@ -13,8 +13,10 @@ const Signup = ({ setSignup }) => {
 
             if (res.data.msg == 'found') {
                 setExist(true)
-            } else {
-
+            } 
+            if(res.data.msg == 'created'){
+                setSignup(false)
+                setLogin(true)
             }
 
         } catch (err) {

@@ -9,10 +9,13 @@ const Login = ({ setLogin}) => {
     const [data, setData] = useState({ email: '', password: '' });
     const[showAlert , setShowAlert] = useState(false);
     const dispatch = useDispatch();
+
     // const [exist, setExist] = useState(false);
     
     const handleLogin = async () => {
         try {
+            console.log("before data",data)
+            
             const res = await axios.post('http://localhost:3000/user/login', data);
             if (res.data) {
                dispatch(addId(res.data._id))
@@ -20,7 +23,7 @@ const Login = ({ setLogin}) => {
             } else {
                  setShowAlert(true);
             }
-         
+            console.log(res.data)
         } catch (err) {
             console.log(`login failed due to ${err}`);
         }

@@ -1,19 +1,19 @@
 const express = require('express');
 const userSchema = require('../models/User');
 const router = express.Router();
-
+const bcrypt = require('bcrypt');
 router.post('/signup', async (req, res) => {
     const { email, password } = req.body;
-
-    const check = await userSchema.findOne({ email: email })
-
+    const hashedPass = await bcrypt.hash(password,10)
+    const check = await userSchema.findOne({ email: email})
+    
     if (check) {
      res.json({msg:'found'})
      console.log("found");
     } else {
 
         const newUser = await new userSchema({
-            email, password
+            email, password:hashedPass
         });
 
         try {
@@ -27,8 +27,12 @@ router.post('/signup', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    const rlt = await userSchema.findOne({ email, password });
-    res.json(rlt)
+    const rlt = await userSchema.findOne({email});
+    const check = await bcrypt.compare(password,rlt.password)
+    if(check){
+        res.json(rlt)
+    }
+    
 });
 
 

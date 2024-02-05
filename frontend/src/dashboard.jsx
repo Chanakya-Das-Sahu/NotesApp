@@ -59,7 +59,7 @@ const Dash = () => {
                         )}
                   </div>  
             </nav>
-            {signup && <Signup setSignup={setSignup} />}
+            {signup && <Signup setSignup={setSignup} setLogin={setLogin} />}
             {login && <Login setLogin={setLogin} setId={setId} />}
             {console.log(Id)}
             {/* {console.log("id",id)} */}
