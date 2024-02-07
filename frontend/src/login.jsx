@@ -5,6 +5,7 @@ import logo from './logo.png';
 import cross from './cross.png';
 import {addId} from './slice'
 import {useDispatch} from 'react-redux'
+// import jwt_decode from 'jwt-decode'
 const Login = ({ setLogin}) => {
     const [data, setData] = useState({ email: '', password: '' });
     const[showAlert , setShowAlert] = useState(false);
@@ -14,21 +15,22 @@ const Login = ({ setLogin}) => {
     
     const handleLogin = async () => {
         try {
-            console.log("before data",data)
-            
             const res = await axios.post('http://localhost:3000/user/login', data);
-            if (res.data) {
-               dispatch(addId(res.data._id))
+           if (res.data.msg=='found') {
+               dispatch(addId(res.data.user._id))
                setLogin(false)
+            console.log("if")
             } else {
-                 setShowAlert(true);
+                 setShowAlert(true)
+                //  console.log(showAlert)
+                // console.log("else")
             }
-            console.log(res.data)
+            console.log(res.data) 
         } catch (err) {
             console.log(`login failed due to ${err}`);
         }
     }
-
+  
     const handleCut = () => {
         setLogin(false)
     }

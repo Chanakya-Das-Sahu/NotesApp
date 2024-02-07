@@ -9,7 +9,6 @@ router.post('/signup', async (req, res) => {
     
     if (check) {
      res.json({msg:'found'})
-     console.log("found");
     } else {
 
         const newUser = await new userSchema({
@@ -27,12 +26,18 @@ router.post('/signup', async (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { email, password } = req.body;
-    const rlt = await userSchema.findOne({email});
-    const check = await bcrypt.compare(password,rlt.password)
-    if(check){
-        res.json(rlt)
+    const user = await userSchema.findOne({email});
+    let check ;
+    if(user){
+    check = await bcrypt.compare(password,user.password)
     }
-    
+
+    if(check){
+        res.json({msg:'found',user})
+        // console.log({msg:'found',user})
+    }else{
+        res.json({msg:'not found'})
+    }
 });
 
 

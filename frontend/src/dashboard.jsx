@@ -14,7 +14,7 @@ const Dash = () => {
     const [signup, setSignup] = useState(false);
     const [login, setLogin] = useState(false);
     const [id, setId] = useState('');
-    const Id = store.getState().user.user.id;
+    let Id = store.getState().user.user.id;
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleSignup = () => {
@@ -26,9 +26,24 @@ const Dash = () => {
         setLogin(true)
         console.log(login)
     }
+
+    const handleLogOut = () =>{
+        dispatch(addId(''))
+        Id = store.getState().user.user.id;
+        setId(Id)
+    }
+
+    useEffect(()=>{
+        Id = store.getState().user.user.id;
+        console.log("every ")
+    })
+
     useEffect(() => {
         setId(Id)
-    },[login,id])
+        // console.log(Id)
+        console.log(id)
+    },[login])
+
     return (
         <>
             <nav>
@@ -37,7 +52,7 @@ const Dash = () => {
                     {id ?
                         (<>
                             <div onClick={() => { navigate(`/home/${id}`) }}>My Notes</div>
-                            <div onClick={() => { dispatch(addId('')) }}>Log Out</div>
+                            <div onClick={handleLogOut}>Log Out</div>
                          </>
                         )
                         :
@@ -61,7 +76,6 @@ const Dash = () => {
             </nav>
             {signup && <Signup setSignup={setSignup} setLogin={setLogin} />}
             {login && <Login setLogin={setLogin} setId={setId} />}
-            {console.log(Id)}
             {/* {console.log("id",id)} */}
         </>
     )

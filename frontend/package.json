@@ -13,6 +13,8 @@
         "@reduxjs/toolkit": "^2.1.0",
         "aws-sdk": "^2.1550.0",
         "axios": "^1.6.5",
+        "jsonwebtoken": "^9.0.2",
+        "jwt-decode": "^4.0.0",
         "mock-aws-s3": "^4.0.2",
         "nock": "^13.5.1",
         "npm": "^10.4.0",
