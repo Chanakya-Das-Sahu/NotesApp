@@ -123,7 +123,7 @@
     "yallist": "^4.0.0"
   },
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "test": "echo \"No tests specified\" && exit 0",
     "build": "echo \"Add build steps if needed\""
   },
