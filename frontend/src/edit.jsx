@@ -1,20 +1,26 @@
 import { React, useEffect, useState } from 'react';
-import { useParams , useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import {store} from './store';
 const Edit = () => {
-    const { id } = useParams();
-    const [data, setData] = useState({ title: '', content: '' });
+    const id = store.getState().user.user.noteId ;
+    const [data, setData] = useState({ title: 'a', content: 'b' });
     const navigate = useNavigate();
     useEffect(() => {
-
+        // console.log("edit",id)
         const getData = async () => {
-
+            
             const res = await axios.get(`http://localhost:3000/note/get/${id}`)
-            console.log(res.data.title);
+            console.log(id)
+            console.log(res)
+            // console.log("getdata",res)
+            // // console.log(res.data.title);
             setData({ title: res.data.title, content: res.data.content })
-            console.log(data)
+            // console.log(data)
         }
+
         getData();
+    
     }, []);
     
     const handleEdit = async () =>{

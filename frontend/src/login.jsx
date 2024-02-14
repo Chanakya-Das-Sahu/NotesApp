@@ -3,29 +3,36 @@ import './login.css';
 import axios from 'axios';
 import logo from './logo.png';
 import cross from './cross.png';
-import {addId} from './slice'
+import {addUserId , addNoteId} from './slice'
 import {useDispatch} from 'react-redux'
+import {useCookies,Cookies} from 'react-cookie' 
+import CookieHandler from './cookieHandler.js';
 // import jwt_decode from 'jwt-decode'
 const Login = ({ setLogin}) => {
     const [data, setData] = useState({ email: '', password: '' });
     const[showAlert , setShowAlert] = useState(false);
     const dispatch = useDispatch();
-
+    const[cookies,setCookies] = useCookies();
+    const Cookie = new Cookies();
+    const {SetCookie} = CookieHandler()
     // const [exist, setExist] = useState(false);
     
     const handleLogin = async () => {
         try {
             const res = await axios.post('http://localhost:3000/user/login', data);
            if (res.data.msg=='found') {
-               dispatch(addId(res.data.user._id))
-               setLogin(false)
-            console.log("if")
+             SetCookie(res.data.token)
+            // setCookies("jwt",res.data.token,Date(Date.now()+(30*24*60*60*1000)))
+            //  const data = decode("jwt")
+            //  console.log("data",decode("jwt").id)
+            // console.log(res)
+            setLogin(false)
             } else {
                  setShowAlert(true)
                 //  console.log(showAlert)
                 // console.log("else")
             }
-            console.log(res.data) 
+            // console.log(res.data) 
         } catch (err) {
             console.log(`login failed due to ${err}`);
         }

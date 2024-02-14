@@ -9,12 +9,16 @@ import Signup from './signup.jsx';
 import Login from './login.jsx';
 import { store } from './store';
 import {useDispatch} from 'react-redux';
-import {addId} from './slice';
+import CookieHandler from './cookieHandler.js';
+
 const Dash = () => {
     const [signup, setSignup] = useState(false);
     const [login, setLogin] = useState(false);
     const [id, setId] = useState('');
-    let Id = store.getState().user.user.id;
+    const {GetCookieData ,DeleteCookie} = CookieHandler();
+    let Id ;
+    // let Id = store.getState().user.user.userId;
+    // console.log()
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleSignup = () => {
@@ -28,19 +32,23 @@ const Dash = () => {
     }
 
     const handleLogOut = () =>{
-        dispatch(addId(''))
-        Id = store.getState().user.user.id;
-        setId(Id)
+        // dispatch(addId(''))
+        // Id = store.getState().user.user.id;
+        // setId(Id)
+       DeleteCookie("jwt")
     }
 
     useEffect(()=>{
-        Id = store.getState().user.user.id;
-        console.log("every ")
+        try{
+        const ID = GetCookieData().id
+           setId(ID)
+        }catch(err){
+            setId('')
+    }
     })
 
     useEffect(() => {
         setId(Id)
-        // console.log(Id)
         console.log(id)
     },[login])
 
@@ -51,7 +59,7 @@ const Dash = () => {
                 <div>
                     {id ?
                         (<>
-                            <div onClick={() => { navigate(`/home/${id}`) }}>My Notes</div>
+                            <div onClick={() => { navigate(`/home`) }}>My Notes</div>
                             <div onClick={handleLogOut}>Log Out</div>
                          </>
                         )

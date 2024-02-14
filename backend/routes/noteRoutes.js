@@ -12,6 +12,8 @@ router.get('/get/:id',async(req,res)=>{
   const{id} = req.params;
   const rlt = await noteSchema.findById(id);
   res.json(rlt);
+  // console.log("yes")
+  // console.log(id)
 })
 
 router.post('/create',async(req,res)=>{

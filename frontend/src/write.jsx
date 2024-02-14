@@ -1,9 +1,11 @@
 import React from 'react';
 import './write.css';
 import { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import axios from 'axios';
+import CookieHandler from './cookieHandler';
 const Write = () => {
+    const {GetCookieData} = CookieHandler();
     const [data, setData] = useState(
         {
             userID: '',
@@ -12,8 +14,7 @@ const Write = () => {
         }
     )
 
-    const { id } = useParams();
-
+    const id = GetCookieData().id;
     useEffect(() => {
         setData({...data,userID:id})
     }, [])
