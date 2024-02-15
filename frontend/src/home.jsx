@@ -21,7 +21,7 @@ const Home = () => {
       
     const getData = async () => {
       // console.log(GetCookieData().id)
-      const res = await axios.get(`https://notesapp-roks.onrender.com/note/getAll/${GetCookieData().id}`)
+      const res = await axios.get(`http://localhost:3000/note/getAll/${GetCookieData().id}`)
       // console.log(id)
       // console.log(res.data.notes[0].content);
       // console.log(res.data.notes);
@@ -40,7 +40,7 @@ const Home = () => {
   const handleDelete = (e, id) => {
 
     const fun = async () => {
-      await axios.delete(`https://notesapp-roks.onrender.com/note/delete/${id}`)
+      await axios.delete(`http://localhost:3000/note/delete/${id}`)
     }
 
     fun();

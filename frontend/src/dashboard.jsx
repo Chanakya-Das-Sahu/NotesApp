@@ -85,7 +85,6 @@ const Dash = () => {
             {signup && <Signup setSignup={setSignup} setLogin={setLogin} />}
             {login && <Login setLogin={setLogin} setId={setId} />}
             {/* {console.log("id",id)} */}
-            <div className='h-96 w-20  bg-red-500'></div>
         </>
     )
 }
