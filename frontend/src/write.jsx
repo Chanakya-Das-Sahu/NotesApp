@@ -21,7 +21,7 @@ const Write = () => {
     }, [])
    
     const handleSave = () =>{
-      axios.post(`http://localhost:3000/note/create`,data);
+      axios.post(`https://notesapp-roks.onrender.com/note/create`,data);
       window.history.back();
     }
 
@@ -52,7 +52,7 @@ export default Write;
 //         // console.log("edit",id)
 //         const getData = async () => {
             
-//             const res = await axios.get(`http://localhost:3000/note/get/${id}`)
+//             const res = await axios.get(`https://notesapp-roks.onrender.com/note/get/${id}`)
 //             console.log(id)
 //             console.log(res)
 //             // console.log("getdata",res)
@@ -66,7 +66,7 @@ export default Write;
 //     }, []);
     
 //     const handleEdit = async () =>{
-//       const res = await axios.put(`http://localhost:3000/note/edit/${id}`,data)
+//       const res = await axios.put(`https://notesapp-roks.onrender.com/note/edit/${id}`,data)
 //        if(res){
 //        window.history.back();
 //     }
