@@ -1,7 +1,7 @@
 const express = require('express');
 const userSchema = require('../models/User');
 const router = express.Router();
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt-nodejs');
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser')
 

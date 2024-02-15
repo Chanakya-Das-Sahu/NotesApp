@@ -12,7 +12,7 @@ const Edit = () => {
         // console.log("edit",id)
         const getData = async () => {
             
-            const res = await axios.get(`http://localhost:3000/note/get/${id}`)
+            const res = await axios.get(`https://notesapp-roks.onrender.com/note/get/${id}`)
             console.log(id)
             console.log(res)
             // console.log("getdata",res)
@@ -26,7 +26,7 @@ const Edit = () => {
     }, []);
     
     const handleEdit = async () =>{
-      const res = await axios.put(`http://localhost:3000/note/edit/${id}`,data)
+      const res = await axios.put(`https://notesapp-roks.onrender.com/note/edit/${id}`,data)
        if(res){
        window.history.back();
     }
