@@ -125,7 +125,7 @@
   "scripts": {
     "start": "node index.js",
     "test": "echo \"No tests specified\" && exit 0",
-    "build": "echo \"Add build steps if needed\""
+    "build": "npm install"
   },
   "author": "",
   "license": "ISC"
