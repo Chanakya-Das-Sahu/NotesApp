@@ -51,8 +51,8 @@
 const express = require('express');
 const userSchema = require('../models/User');
 const router = express.Router();
-//const jwt = require('jsonwebtoken');
-//const cookieParser = require('cookie-parser')
+const jwt = require('jsonwebtoken');
+const cookieParser = require('cookie-parser')
 
 router.post('/signup', async (req, res) => {
     const { email, password } = req.body;
