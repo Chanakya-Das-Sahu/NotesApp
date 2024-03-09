@@ -7,9 +7,11 @@ import cross from './cross.png';
 const Signup = ({ setSignup , setLogin}) => {
     const [data, setData] = useState({ email: '', password: '' });
     const [exist, setExist] = useState(false);
+    const[isEmail,setIsEmail] = useState('')
+    const[isPassword,setIsPassword] = useState('')
     const handleSignup = async () => {
         try {
-            const res = await axios.post('https://notesapp-roks.onrender.com/user/signup', data);
+            const res = await axios.post('http://localhost:3000/user/signup', data);
 
             if (res.data.msg == 'found') {
                 setExist(true)
@@ -28,6 +30,44 @@ const Signup = ({ setSignup , setLogin}) => {
         setSignup(false)
     }
 
+    const validateForm = () =>{
+        let checked = true 
+       if(!checkEmail(data.email.trim())){
+        checked = false
+       setIsEmail('Please Enter Valid Email ')
+  }else{
+    setIsEmail('')
+  }
+      // false , please valid email
+
+        if(!data.email.trim()){
+            checked = false
+           setIsEmail('Please Enter Email ')
+      }
+        
+       if(!data.password.trim()){
+          checked = false
+          setIsPassword('Please Enter Password')
+       }else{
+        setIsPassword('')
+       }
+
+    //    if(!checked){
+    //     console.log('no')
+    //    }
+
+
+       if(checked){
+        // console.log('yes')
+         handleSignup();
+       }
+    }
+
+    const checkEmail = (email) =>{
+     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/ 
+     return regex.test(email)
+    }
+
     return (
         <>
             <div id='container'>
@@ -38,11 +78,18 @@ const Signup = ({ setSignup , setLogin}) => {
                         This email already exists
                     </div>
                 }
+                {isEmail ?
+                <lable className='lable' style={{color:'red'}} >{isEmail}</lable> :
                 <lable className='lable'>Enter Your Email </lable>
+                 
+                 }
                 <input type="text" placeholder='email' name="email" onChange={(e) => { setData({ ...data, [e.target.name]: e.target.value }) }} />
-                <lable className='lable'>Enter Your Password</lable>
+                {isPassword ?
+                <lable className='lable' style={{color:'red'}} >{isPassword}</lable>:
+                <lable className='lable'>Enter Your Password</lable> 
+                 }
                 <input type="text" placeholder='password' name="password" onChange={(e) => { setData({ ...data, [e.target.name]: e.target.value }) }} />
-                <button onClick={handleSignup}>Signup</button>
+                <button onClick={validateForm}>Signup</button>
             </div>
         </>
 

@@ -3,10 +3,9 @@ import './write.css';
 import { useState, useEffect } from 'react';
 import { Link} from 'react-router-dom';
 import axios from 'axios';
-import CookieHandler from './cookieHandler';
 import save from './save.png'
+import {store} from './store'
 const Write = () => {
-    const {GetCookieData} = CookieHandler();
     const [data, setData] = useState(
         {
             userID: '',
@@ -15,13 +14,13 @@ const Write = () => {
         }
     )
 
-    const id = GetCookieData().id;
+    const userId = store.getState().user.detail.userId;
     useEffect(() => {
-        setData({...data,userID:id})
+        setData({...data,userID:userId})
     }, [])
    
     const handleSave = () =>{
-      axios.post(`https://notesapp-roks.onrender.com/note/create`,data);
+      axios.post(`http://localhost:3000/note/create`,data,{withCredentials:true});
       window.history.back();
     }
 
@@ -52,7 +51,7 @@ export default Write;
 //         // console.log("edit",id)
 //         const getData = async () => {
             
-//             const res = await axios.get(`https://notesapp-roks.onrender.com/note/get/${id}`)
+//             const res = await axios.get(`http://localhost:3000/note/get/${id}`)
 //             console.log(id)
 //             console.log(res)
 //             // console.log("getdata",res)
@@ -66,7 +65,7 @@ export default Write;
 //     }, []);
     
 //     const handleEdit = async () =>{
-//       const res = await axios.put(`https://notesapp-roks.onrender.com/note/edit/${id}`,data)
+//       const res = await axios.put(`http://localhost:3000/note/edit/${id}`,data)
 //        if(res){
 //        window.history.back();
 //     }

@@ -7,24 +7,27 @@ import { TiDelete } from 'react-icons/ti'
 import deleteImg from './delete.png';
 import editImg from './edit.png';
 import {store} from './store.js';
-import {addUserId,addNoteId} from './slice.js';
+import {addNoteId} from './slice.js';
 import { useDispatch } from 'react-redux';
-import CookieHandler from './cookieHandler.js';
 import { useNavigate } from 'react-router-dom';
 import plus from './plus.png';
 const Home = () => {
   const [list, setList] = useState([]);
   const dispatch = useDispatch()
-  const {GetCookieData}= CookieHandler();
   const navigate = useNavigate();
+  const userId = store.getState().user.detail.userId;
   useEffect(() => {
       
     const getData = async () => {
       // console.log(GetCookieData().id)
-      const res = await axios.get(`https://notesapp-roks.onrender.com/note/getAll/${GetCookieData().id}`)
+      const res = await axios.get(`http://localhost:3000/note/getAll/${userId}`,{
+        withCredentials:true
+      })
       // console.log(id)
       // console.log(res.data.notes[0].content);
       // console.log(res.data.notes);
+      // console.log(res.data.notes)
+      // console.log("charu")
       setList(res.data.notes);
       // console.log(list);
     }
@@ -40,7 +43,7 @@ const Home = () => {
   const handleDelete = (e, id) => {
 
     const fun = async () => {
-      await axios.delete(`https://notesapp-roks.onrender.com/note/delete/${id}`)
+      await axios.delete(`http://localhost:3000/note/delete/${id}`,{withCredentials:true})
     }
 
     fun();

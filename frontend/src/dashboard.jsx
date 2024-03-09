@@ -9,13 +9,13 @@ import Signup from './signup.jsx';
 import Login from './login.jsx';
 import { store } from './store';
 import {useDispatch} from 'react-redux';
-import CookieHandler from './cookieHandler.js';
-
+import {useCookies} from 'react-cookie';
+import {flush} from './slice';
 const Dash = () => {
     const [signup, setSignup] = useState(false);
     const [login, setLogin] = useState(false);
     const [id, setId] = useState('');
-    const {GetCookieData ,DeleteCookie} = CookieHandler();
+    const[cookie,setCookie,removeCookie] = useCookies();
     let Id ;
     // let Id = store.getState().user.user.userId;
     // console.log()
@@ -23,25 +23,31 @@ const Dash = () => {
     const dispatch = useDispatch();
     const handleSignup = () => {
         setSignup(true)
-        console.log("signup")
+        setLogin(false)
+        // console.log("signup")
     }
 
     const handleLogin = () => {
         setLogin(true)
-        console.log(login)
+        setSignup(false)
+        // console.log(login)
     }
 
     const handleLogOut = () =>{
+        removeCookie('jwt')
+        dispatch(flush())
         // dispatch(addId(''))
-        // Id = store.getState().user.user.id;
-        // setId(Id)
-       DeleteCookie("jwt")
+        Id = store.getState().user.detal.userId;
+        setId(Id)
     }
 
     useEffect(()=>{
         try{
-        const ID = GetCookieData().id
-           setId(ID)
+        Id = store.getState().user.detail.userId;
+        console.log(store.getState().user.detail)
+           setId(Id)
+        // console.log("ID",ID)
+        // console.log(store.getState())
         }catch(err){
             setId('')
     }

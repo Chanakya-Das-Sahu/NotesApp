@@ -4,10 +4,12 @@ const router = express.Router();
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const cookieParser = require('cookie-parser')
+require('dotenv').config()
 
 router.post('/signup', async (req, res) => {
     const { email, password } = req.body;
-    const hashedPass = await bcrypt.hash(password)
+    // console.log(req.body)
+    const hashedPass = bcrypt.hashSync(password,10)
     const check = await userSchema.findOne({ email: email})
     
     if (check) {
@@ -37,7 +39,7 @@ router.post('/login', async (req, res) => {
     
     }
     if(check){
-        token = jwt.sign({email:user.email,id:user._id},'your_secret_key',{expiresIn:'5s'})
+        token = jwt.sign({email:user.email,id:user._id},process.env.JWT_KEY,{expiresIn:'6000s'})
         res.json({msg:'found',token})
     }else{
         res.json({msg:'not found'})
