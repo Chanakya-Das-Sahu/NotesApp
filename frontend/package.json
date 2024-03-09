@@ -41,7 +41,7 @@
     "vite": {
       "proxy": {
         "/api": {
-          "target": "http://localhost:3000",
+          "target": "https://notesapp-roks.onrender.com",
           "changeOrigin": true
         }
       }

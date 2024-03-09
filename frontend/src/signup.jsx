@@ -11,7 +11,7 @@ const Signup = ({ setSignup , setLogin}) => {
     const[isPassword,setIsPassword] = useState('')
     const handleSignup = async () => {
         try {
-            const res = await axios.post('http://localhost:3000/user/signup', data);
+            const res = await axios.post('https://notesapp-roks.onrender.com/user/signup', data);
 
             if (res.data.msg == 'found') {
                 setExist(true)

@@ -20,7 +20,7 @@ const Home = () => {
       
     const getData = async () => {
       // console.log(GetCookieData().id)
-      const res = await axios.get(`http://localhost:3000/note/getAll/${userId}`,{
+      const res = await axios.get(`https://notesapp-roks.onrender.com/note/getAll/${userId}`,{
         withCredentials:true
       })
       // console.log(id)
@@ -43,7 +43,7 @@ const Home = () => {
   const handleDelete = (e, id) => {
 
     const fun = async () => {
-      await axios.delete(`http://localhost:3000/note/delete/${id}`,{withCredentials:true})
+      await axios.delete(`https://notesapp-roks.onrender.com/note/delete/${id}`,{withCredentials:true})
     }
 
     fun();

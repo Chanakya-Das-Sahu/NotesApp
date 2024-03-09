@@ -28,7 +28,7 @@ const connectToMongo = require('./db.js');
 const userRoutes = require('./routes/userRoutes');
 const noteRoutes = require('./routes/noteRoutes');
 const cookieParser = require('cookie-parser');
-require('dotenv').config();
+//require('dotenv').config();
 const port = process.env.PORT || 3000;
 const app = express();
 const corsOptions = {
@@ -65,7 +65,7 @@ app.listen(port, () => {
 
 // // Middleware
 // app.use(cors({
-//   origin: 'http://localhost:3000', // Adjust the origin to match your client's address
+//   origin: 'https://notesapp-roks.onrender.com', // Adjust the origin to match your client's address
 //   credentials: true // Allow cookies to be sent cross-origin
 // }));
 // app.use(express.json());
