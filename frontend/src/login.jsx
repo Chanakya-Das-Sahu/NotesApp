@@ -15,36 +15,24 @@ const Login = ({ setLogin }) => {
     const dispatch = useDispatch();
     const [cookie, setCookie, removeCookie] = useCookies();
     const cookies = new Cookies();
-    // const [exist, setExist] = useState(false);
 
     const handleLogin = async () => {
         try {
             
-            // const res = await axios.post('https://notesapp-roks.onrender.com/user/login', data );
-            const res = await axios.post('https://notesapp-roks.onrender.com/user/login', data);
+            const res = await axios.post('/user/login', data);
 
             if (res.data.msg == 'found') {
-                // setCookie('jwt', res.data.token , {
-                //     domain: window.location.hostname,
-                //     path:'/',
-                //     secure:false
-                // })
                 setCookie('jwt',res.data.token)
                 const userData = jwtDecode(res.data.token)
-                // setCookies("jwt",res.data.token,Date(Date.now()+(30*24*60*60*1000)))
-                //  const data = decode("jwt")
-                //  console.log("data",decode("jwt").id)
-                // console.log(res)
+             
                 dispatch(addUserEmail(userData.email))
                 console.log(userData)
                 dispatch(addUserId(userData.id))
                 setLogin(false)
             } else {
                 setShowAlert(true)
-                //  console.log(showAlert)
-                // console.log("else")
+             
             }
-            // console.log(res.data) 
         } catch (err) {
             console.log(`login failed due to ${err}`);
         }
@@ -79,7 +67,6 @@ const Login = ({ setLogin }) => {
       handleLogin()
        }
 
-        // console.log(isEmail) 
       
        
     }

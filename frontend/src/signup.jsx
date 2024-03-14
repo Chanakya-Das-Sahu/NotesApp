@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './signup.css';
-// import { useNavigate} from 'react-router-dom';
 import axios from 'axios';
 import logo from './logo.png';
 import cross from './cross.png';
@@ -11,7 +10,7 @@ const Signup = ({ setSignup , setLogin}) => {
     const[isPassword,setIsPassword] = useState('')
     const handleSignup = async () => {
         try {
-            const res = await axios.post('https://notesapp-roks.onrender.com/user/signup', data);
+            const res = await axios.post('/user/signup', data);
 
             if (res.data.msg == 'found') {
                 setExist(true)
@@ -38,7 +37,6 @@ const Signup = ({ setSignup , setLogin}) => {
   }else{
     setIsEmail('')
   }
-      // false , please valid email
 
         if(!data.email.trim()){
             checked = false
@@ -52,13 +50,10 @@ const Signup = ({ setSignup , setLogin}) => {
         setIsPassword('')
        }
 
-    //    if(!checked){
-    //     console.log('no')
-    //    }
+   
 
 
        if(checked){
-        // console.log('yes')
          handleSignup();
        }
     }

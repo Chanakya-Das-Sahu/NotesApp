@@ -1,24 +1,19 @@
-import { React, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
+import { useEffect, useState } from 'react';
+// import {React , useState , useEffect } from 'react' : Not working in case 
 import axios from 'axios';
 import { store } from './store';
 import './edit.css';
 import save from './save.png';
 const Edit = () => {
     const noteId = store.getState().user.detail.noteId;
-    const [data, setData] = useState({ title: 'a', content: 'b' });
-    const navigate = useNavigate();
+    const [data, setData] = useState({ title: '', content: '' });
     useEffect(() => {
-        // console.log("edit",id)
         const getData = async () => {
             console.log(noteId)
-            const res = await axios.get(`https://notesapp-roks.onrender.com/note/get/${noteId}`,{ withCredentials: true })
-            // console.log(id)
+            const res = await axios.get(`/note/get/${noteId}`,{ withCredentials: true })
             console.log(res)
-            // console.log("getdata",res)
-            // // console.log(res.data.title);
             setData({ title: res.data.title, content: res.data.content })
-            // console.log(data)
         }
 
         getData();
@@ -26,7 +21,7 @@ const Edit = () => {
     }, []);
 
     const handleEdit = async () => {
-        const res = await axios.put(`https://notesapp-roks.onrender.com/note/edit/${noteId}`, data , {withCredentials:true})
+        const res = await axios.put(`/note/edit/${noteId}`, data , {withCredentials:true})
         if (res) {
             window.history.back();
         }
@@ -42,6 +37,8 @@ const Edit = () => {
             </div>
         </>
     )
+    
 }
 
 export default Edit;
+

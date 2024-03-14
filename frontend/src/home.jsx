@@ -19,17 +19,11 @@ const Home = () => {
   useEffect(() => {
       
     const getData = async () => {
-      // console.log(GetCookieData().id)
-      const res = await axios.get(`https://notesapp-roks.onrender.com/note/getAll/${userId}`,{
+      const res = await axios.get(`/note/getAll/${userId}`,{
         withCredentials:true
       })
-      // console.log(id)
-      // console.log(res.data.notes[0].content);
-      // console.log(res.data.notes);
-      // console.log(res.data.notes)
-      // console.log("charu")
+     
       setList(res.data.notes);
-      // console.log(list);
     }
     getData();
   })
@@ -43,7 +37,7 @@ const Home = () => {
   const handleDelete = (e, id) => {
 
     const fun = async () => {
-      await axios.delete(`https://notesapp-roks.onrender.com/note/delete/${id}`,{withCredentials:true})
+      await axios.delete(`/note/delete/${id}`,{withCredentials:true})
     }
 
     fun();
@@ -92,7 +86,6 @@ const Home = () => {
 
       </div>
 
-      {/* <Link id="add" to={`/write`}></Link> */}
       <img src={plus} id='add' onClick={handleWrite} />
     </>
   )

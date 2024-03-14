@@ -17,26 +17,21 @@ const Dash = () => {
     const [id, setId] = useState('');
     const[cookie,setCookie,removeCookie] = useCookies();
     let Id ;
-    // let Id = store.getState().user.user.userId;
-    // console.log()
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleSignup = () => {
         setSignup(true)
         setLogin(false)
-        // console.log("signup")
     }
 
     const handleLogin = () => {
         setLogin(true)
         setSignup(false)
-        // console.log(login)
     }
 
     const handleLogOut = () =>{
         removeCookie('jwt')
         dispatch(flush())
-        // dispatch(addId(''))
         Id = store.getState().user.detal.userId;
         setId(Id)
     }
@@ -46,8 +41,6 @@ const Dash = () => {
         Id = store.getState().user.detail.userId;
         console.log(store.getState().user.detail)
            setId(Id)
-        // console.log("ID",ID)
-        // console.log(store.getState())
         }catch(err){
             setId('')
     }
@@ -90,7 +83,6 @@ const Dash = () => {
             </nav>
             {signup && <Signup setSignup={setSignup} setLogin={setLogin} />}
             {login && <Login setLogin={setLogin} setId={setId} />}
-            {/* {console.log("id",id)} */}
         </>
     )
 }
