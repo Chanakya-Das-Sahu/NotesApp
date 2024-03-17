@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken')
 const User = require('../models/User.js')
 const auth = (req, res, next) => {
     const token = req.cookies.jwt;
+    // console.log(req.cookies)
     try {
         const userDetail = jwt.verify(token,'your_secret_key')
         const id = userDetail.id;

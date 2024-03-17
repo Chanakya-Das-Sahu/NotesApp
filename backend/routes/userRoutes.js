@@ -4,7 +4,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const cookieParser = require('cookie-parser')
-//require('dotenv').config()
+require('dotenv').config()
 
 router.post('/signup', async (req, res) => {
     const { email, password } = req.body;

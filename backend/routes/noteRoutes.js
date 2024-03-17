@@ -5,28 +5,18 @@ const mongoose = require('mongoose');
 const cookie = require('cookie');
 const auth = require('../middleware/Auth.js')
 router.get('/getAll/:id',auth,async(req,res)=>{
-      // const cookieHeader = req.cookies.jwt;
-      // console.log(req.cookies.jwt)
-      // const {jwt} = req.cookies ;
-      // console.log(jwt);
-      // console.log(1)
-      // console.log(req.cookies.jwt)
       const {id} = req.params ;
-      // console.log(cookieHeader)
-      // console.log("2")
-      // const charu = cookie.parse(cookieHeader)
-      // console.log(charu)
+   
       const notes = await noteSchema.find({userID:id});
-      // console.log(notes)
-     res.json({notes})
+
+      res.json({notes})
 });
 
 router.get('/get/:id',auth,async(req,res)=>{
   const{id} = req.params;
   const rlt = await noteSchema.findById(id);
   res.json(rlt);
-  // console.log("yes")
-  // console.log(id)
+  
 })
 
 router.post('/create',auth,async(req,res)=>{

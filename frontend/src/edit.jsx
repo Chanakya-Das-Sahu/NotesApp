@@ -11,17 +11,16 @@ const Edit = () => {
     useEffect(() => {
         const getData = async () => {
             console.log(noteId)
-            const res = await axios.get(`/note/get/${noteId}`,{ withCredentials: true })
+            const res = await axios.get(`https://notesapp-roks.onrender.com/note/get/${noteId}`,{ withCredentials: true })
             console.log(res)
             setData({ title: res.data.title, content: res.data.content })
         }
 
         getData();
-
     }, []);
 
     const handleEdit = async () => {
-        const res = await axios.put(`/note/edit/${noteId}`, data , {withCredentials:true})
+        const res = await axios.put(`https://notesapp-roks.onrender.com/note/edit/${noteId}`, data , {withCredentials:true})
         if (res) {
             window.history.back();
         }

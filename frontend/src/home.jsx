@@ -16,17 +16,20 @@ const Home = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const userId = store.getState().user.detail.userId;
-  useEffect(() => {
-      
-    const getData = async () => {
-      const res = await axios.get(`/note/getAll/${userId}`,{
+
+  
+ const getData = async () => {
+      const res = await axios.get(`https://notesapp-roks.onrender.com/note/getAll/${userId}`,{
         withCredentials:true
       })
-     
+      // console.log(res.data.notes)
       setList(res.data.notes);
     }
+
+  useEffect(() => {
+    console.log('hi')
     getData();
-  })
+  },[])
  
   const handleEdit = (id) =>{
     console.log("edit")
@@ -35,13 +38,13 @@ const Home = () => {
   }
 
   const handleDelete = (e, id) => {
-
+   
     const fun = async () => {
-      await axios.delete(`/note/delete/${id}`,{withCredentials:true})
+      await axios.delete(`https://notesapp-roks.onrender.com/note/delete/${id}`,{withCredentials:true})
     }
 
     fun();
-
+     getData()
     e.preventDefault();
   }
 

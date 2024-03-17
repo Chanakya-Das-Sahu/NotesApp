@@ -20,7 +20,7 @@ const Write = () => {
     }, [])
    
     const handleSave = () =>{
-      axios.post(`/note/create`,data,{withCredentials:true});
+      axios.post(`https://notesapp-roks.onrender.com/note/create`,data,{withCredentials:true});
       window.history.back();
     }
 
