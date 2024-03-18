@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 const corsConfig = {
-  origin: 'https://quiet-platypus-72ccf6.netlify.app',
+  origin: ['https://quiet-platypus-72ccf6.netlify.app','http://localhost:5173']
   credentials: true ,
   sameSite: 'none'
 }
