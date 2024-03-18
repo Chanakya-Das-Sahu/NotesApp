@@ -23,8 +23,9 @@ const Login = ({ setLogin }) => {
 
             if (res.data.msg == 'found') {
                 setCookie('jwt',res.data.token,{
-                    secure:true,
-                    httpOnly:true
+                    secure: true ,
+                    httpOnly: true ,
+                    domain:'https://quiet-platypus-72ccf6.netlify.app'
                 })
                 const userData = jwtDecode(res.data.token)
              
