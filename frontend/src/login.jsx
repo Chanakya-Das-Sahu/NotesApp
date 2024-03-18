@@ -22,7 +22,10 @@ const Login = ({ setLogin }) => {
             const res = await axios.post('https://notesapp-roks.onrender.com/user/login', data);
 
             if (res.data.msg == 'found') {
-                setCookie('jwt',res.data.token)
+                setCookie('jwt',res.data.token,{
+                    secure:true,
+                    httpOnly:true
+                })
                 const userData = jwtDecode(res.data.token)
              
                 dispatch(addUserEmail(userData.email))
