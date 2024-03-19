@@ -16,7 +16,8 @@ app.use(cookieParser());
 const corsConfig = {
   origin: ['https://quiet-platypus-72ccf6.netlify.app','http://localhost:5173'],
   credentials: true ,
-  sameSite: 'none'
+  sameSite: 'none',
+  path:'/'
 }
 
 app.use(cors(corsConfig))
