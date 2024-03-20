@@ -22,7 +22,11 @@ const Login = ({ setLogin }) => {
             const res = await axios.post('/user/login', data);
 
             if (res.data.msg == 'found') {
-                setCookie('jwt',res.data.token)
+                setCookie('jwt',res.data.token,{
+                    secure: true ,
+                    httpOnly: true ,
+                    domain:'https://quiet-platypus-72ccf6.netlify.app'
+                })
                 const userData = jwtDecode(res.data.token)
                 
                 dispatch(addUserEmail(userData.email))
