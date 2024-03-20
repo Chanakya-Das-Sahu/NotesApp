@@ -19,9 +19,14 @@ const Write = () => {
         setData({...data,userID:userId})
     }, [])
    
-    const handleSave = () =>{
-      axios.post(`https://notesapp-roks.onrender.com/note/create`,data,{withCredentials:true});
-      window.history.back();
+    const handleSave = async () =>{
+     const res = await axios.post(`/note/create`,data,{withCredentials:true});
+    //  console.log(res.data)
+    console.log(res)
+      if(res.data.msg){
+     window.history.back();
+     }
+
     }
 
     return (

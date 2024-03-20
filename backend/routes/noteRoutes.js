@@ -25,6 +25,7 @@ router.post('/create',auth,async(req,res)=>{
      userID , title , content 
    })
    await newNote.save();
+   res.json({msg:'created'})
 });
 
 router.put('/edit/:id',auth,async(req,res)=>{
@@ -41,6 +42,7 @@ router.delete('/delete/:id',auth,async(req,res)=>{
      const {id} = req.params ;
 try{ 
      await noteSchema.findByIdAndDelete(id)
+     res.json({msg:'deleted'})
  }catch(err){
     console.log(`There is a problem with error ${err}`)
  }

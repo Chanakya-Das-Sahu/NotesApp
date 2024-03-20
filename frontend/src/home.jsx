@@ -19,7 +19,7 @@ const Home = () => {
 
   
  const getData = async () => {
-      const res = await axios.get(`https://notesapp-roks.onrender.com/note/getAll/${userId}`,{
+      const res = await axios.get(`/note/getAll/${userId}`,{
         withCredentials:true
       })
       // console.log(res.data.notes)
@@ -37,14 +37,9 @@ const Home = () => {
      navigate('/edit')
   }
 
-  const handleDelete = (e, id) => {
-   
-    const fun = async () => {
-      await axios.delete(`https://notesapp-roks.onrender.com/note/delete/${id}`,{withCredentials:true})
-    }
-
-    fun();
-     getData()
+  const handleDelete = async (e, id) => {
+    const res = await axios.delete(`/note/delete/${id}`,{withCredentials:true})
+    getData()    
     e.preventDefault();
   }
 
