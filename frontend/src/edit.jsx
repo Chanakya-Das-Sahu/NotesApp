@@ -5,23 +5,41 @@ import axios from 'axios';
 import { store } from './store';
 import './edit.css';
 import save from './save.png';
+import {useNavigate} from 'react-router-dom'
+import { UseDispatch } from 'react-redux';
 const Edit = () => {
     const noteId = store.getState().user.detail.noteId;
+    const Token = localStorage.getItem('token')
     const [data, setData] = useState({ title: '', content: '' });
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
     useEffect(() => {
         const getData = async () => {
             console.log(noteId)
-            const res = await axios.get(`/note/get/${noteId}`,{ withCredentials: true })
+            const res = await axios.get(`https://notesapp-roks.onrender.com/note/get/${noteId}`,{  headers:{
+                'Authorization':Token ,
+               } })
             console.log(res)
+            if(res.data.alert){
+                console.log(res.data.alert)
+                dispatch(flush())
+                navigate('/expired')
+               }
             setData({ title: res.data.title, content: res.data.content })
         }
-
         getData();
     }, []);
 
     const handleEdit = async () => {
-        const res = await axios.put(`/note/edit/${noteId}`, data , {withCredentials:true})
-        if (res) {
+        const res = await axios.put(`https://notesapp-roks.onrender.com/note/edit/${noteId}`, data , { headers:{
+        'Authorization':Token ,
+       }})
+       if(res.data.alert){
+        console.log(res.data.alert)
+        dispatch(flush())
+        navigate('/expired')
+       }
+        if (res.data.noy) {
             window.history.back();
         }
     }

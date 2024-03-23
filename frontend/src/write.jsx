@@ -1,7 +1,8 @@
 import React from 'react';
 import './write.css';
 import { useState, useEffect } from 'react';
-import { Link} from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios';
 import save from './save.png'
 import {store} from './store'
@@ -13,15 +14,24 @@ const Write = () => {
             content: '',
         }
     )
-
+    const dispatch = useDispatch() 
+    const navigate = useNavigate()
+    const Token = localStorage.getItem('token')
     const userId = store.getState().user.detail.userId;
     useEffect(() => {
         setData({...data,userID:userId})
     }, [])
    
     const handleSave = async () =>{
-     const res = await axios.post(`/note/create`,data,{withCredentials:true});
+     const res = await axios.post(`https://notesapp-roks.onrender.com/note/create`,data,{ headers:{
+        'Authorization':Token ,
+       }});
     //  console.log(res.data)
+    if(res.data.alert){
+        console.log(res.data.alert)
+        dispatch(flush())
+        navigate('/expired')
+       }
     console.log(res)
       if(res.data.msg){
      window.history.back();

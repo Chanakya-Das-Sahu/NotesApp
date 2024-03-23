@@ -3,7 +3,7 @@ const connectToMongo = require('./db.js');
 const userRoutes = require('./routes/userRoutes');
 const noteRoutes = require('./routes/noteRoutes');
 const cookieParser = require('cookie-parser');
-// const cors = require('cors')
+const cors = require('cors')
 require('dotenv').config();
 const port = process.env.PORT || 3000;
 
@@ -13,21 +13,14 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser());
 
-<<<<<<< HEAD
-// const corsConfig = {
-//   origin: ['https://quiet-platypus-72ccf6.netlify.app','http://localhost:5173'] ,
-//   credentials: true 
-// }
-=======
 const corsConfig = {
-  origin: ['https://quiet-platypus-72ccf6.netlify.app','http://localhost:5173'],
-  credentials: true ,
-  sameSite: 'none',
-  path:'/'
+  origin: ['https://quiet-platypus-72ccf6.netlify.app','http://localhost:5173'] ,
+  credentials: true 
 }
->>>>>>> f2bd9b1330d1d2bc3fb285609bbf6cea18f573cf
 
-// app.use(cors(corsConfig))
+
+
+app.use(cors(corsConfig))
 
 // Routes
 

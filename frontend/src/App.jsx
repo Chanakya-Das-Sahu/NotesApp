@@ -6,6 +6,7 @@ import Signup from './signup.jsx';
 import Login from './login.jsx';
 import Dash from './dashboard.jsx';
 import Edit from './edit.jsx';
+import Expired from './expired.jsx';
 const App = () =>{
   return(
      <BrowserRouter>
@@ -16,6 +17,7 @@ const App = () =>{
       <Route path='/signup' element={<Signup/>}></Route>
       <Route path='/login' element={<Login/>}></Route>
       <Route path='/edit' element={<Edit/>}></Route>
+      <Route path='/expired' element={<Expired/>}></Route>
     </Routes>
    </BrowserRouter>
   )

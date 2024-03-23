@@ -7,7 +7,7 @@ import { TiDelete } from 'react-icons/ti'
 import deleteImg from './delete.png';
 import editImg from './edit.png';
 import {store} from './store.js';
-import {addNoteId} from './slice.js';
+import {addNoteId,flush} from './slice.js';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import plus from './plus.png';
@@ -16,18 +16,27 @@ const Home = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const userId = store.getState().user.detail.userId;
-
+  const Token = localStorage.getItem('token')
   
  const getData = async () => {
-      const res = await axios.get(`/note/getAll/${userId}`,{
-        withCredentials:true
+      const res = await axios.get(`https://notesapp-roks.onrender.com/note/getAll/${userId}`,{
+       headers:{
+        'Authorization':Token ,
+       }
       })
+      if(res.data.alert){
+       console.log(res.data.alert)
+       dispatch(flush())
+       navigate('/expired')
+      }
       // console.log(res.data.notes)
+      if(res.data.notes){
       setList(res.data.notes);
+      }
     }
 
   useEffect(() => {
-    console.log('hi')
+    console.log('hi',Token)
     getData();
   },[])
  
@@ -38,7 +47,9 @@ const Home = () => {
   }
 
   const handleDelete = async (e, id) => {
-    const res = await axios.delete(`/note/delete/${id}`,{withCredentials:true})
+    const res = await axios.delete(`https://notesapp-roks.onrender.com/note/delete/${id}`,{ headers:{
+        'Authorization':Token ,
+       }})
     getData()    
     e.preventDefault();
   }

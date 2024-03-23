@@ -4,22 +4,24 @@ import axios from 'axios';
 import logo from './logo.png';
 import cross from './cross.png';
 import { useDispatch } from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 // import { useCookies, Cookies } from 'react-cookie'
 import { jwtDecode } from 'jwt-decode'
 import { addUserEmail, addUserId } from './slice'
-const Login = ({ setLogin }) => {
+const Expired = ({ setLogin }) => {
     const [data, setData] = useState({ email: '', password: '' });
     const [showAlert, setShowAlert] = useState(false);
     const [isEmail, setIsEmail] = useState('')
     const [isPassword, setIsPassword] = useState('')
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     // const [cookie, setCookie, removeCookie] = useCookies();
     // const cookies = new Cookies();
 
     const handleLogin = async () => {
         try {
 
-            const res = await axios.post('https://notesapp-roks.onrender.com/user/login', data);
+            const res = await axios.post('http://localhost:3000/user/login', data);
 
             if (res.data.msg == 'found') {
              
@@ -33,7 +35,8 @@ const Login = ({ setLogin }) => {
                 dispatch(addUserEmail(userData.email))
                 console.log(userData)
                 dispatch(addUserId(userData.id))
-                setLogin(false)
+                // setLogin(false)
+                navigate('/')
             } else {
                 setShowAlert(true)
 
@@ -43,9 +46,7 @@ const Login = ({ setLogin }) => {
         }
     }
 
-    const handleCut = () => {
-        setLogin(false)
-    }
+    
 
     const validateForm = async () => {
         let checked = true;
@@ -84,7 +85,7 @@ const Login = ({ setLogin }) => {
     return (
         <>
             <div id='container'>
-                <img src={cross} id='cross' onClick={handleCut}></img>
+                <h1 style={{color:'#e14d4d',border:'2px solid #e14d4d',borderRadius:'5px',padding:'5px'}}>Your Session Has Been Expired !</h1>
                 <img src={logo} id='login-logo'></img>
                 {showAlert &&
                     <div id='red'>
@@ -110,4 +111,4 @@ const Login = ({ setLogin }) => {
     )
 }
 
-export default Login;
+export default Expired;
