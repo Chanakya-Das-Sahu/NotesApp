@@ -6,7 +6,7 @@ import { store } from './store';
 import './edit.css';
 import save from './save.png';
 import {useNavigate} from 'react-router-dom'
-import { UseDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 const Edit = () => {
     const noteId = store.getState().user.detail.noteId;
     const Token = localStorage.getItem('token')
