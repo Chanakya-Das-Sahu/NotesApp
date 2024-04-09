@@ -24,10 +24,13 @@ const Home = () => {
         'Authorization':Token ,
        }
       })
+     console.log('res.data.alert',res.data.alert)
       if(res.data.alert){
-       console.log(res.data.alert)
+       console.log('yes alert',res.data.alert)
        dispatch(flush())
        navigate('/expired')
+      }else{
+       console.log('no alert')
       }
       // console.log(res.data.notes)
       if(res.data.notes){
