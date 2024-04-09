@@ -39,7 +39,7 @@ router.post('/login', async (req, res) => {
     
     }
     if(check){
-        token = jwt.sign({email:user.email,id:user._id},process.env.JWT_KEY,{expiresIn:'6000s'})
+        token = jwt.sign({email:user.email,id:user._id},process.env.JWT_KEY,{expiresIn:'20s'})
         res.json({msg:'found',token})
     }else{
         res.json({msg:'not found'})
