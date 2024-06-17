@@ -1,6 +1,5 @@
 // this is expired.jsx 2 for testing purpose only
 import React, { useEffect, useState } from 'react';
-import './login.css';
 import axios from 'axios';
 import logo from './logo.png';
 import cross from './cross.png';
@@ -22,7 +21,7 @@ const Expired = ({ setLogin }) => {
     const handleLogin = async () => {
         try {
 
-            const res = await axios.post('https://notesapp-roks.onrender.com/user/login', data);
+            const res = await axios.post('http://localhost:3000/user/login', data);
 
             if (res.data.msg == 'found') {
              
