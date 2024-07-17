@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 const corsConfig = {
-  origin: ['https://quiet-platypus-72ccf6.netlify.app','http://localhost:5173','https://chanakya-notesapp.netlify.app'] ,
+  origin: ['http://localhost:5174','http://localhost:5173','https://chanakya-notesapp.netlify.app'] ,
   credentials: true 
 }
 
@@ -23,7 +23,9 @@ const corsConfig = {
 app.use(cors(corsConfig))
 
 // Routes
-
+app.use('/',()=>{
+  res.json({msg:'server is working on port :',port})
+})
 app.use('/user', userRoutes);
 app.use('/note', noteRoutes);
 
