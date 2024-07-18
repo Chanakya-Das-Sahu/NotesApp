@@ -6,10 +6,6 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors')
 require('dotenv').config();
 const port = process.env.PORT || 3000;
-// import { injectSpeedInsights } from '@vercel/speed-insights';
-const {injectSpeedInsights} = require('@vercel/speed-insights')
-injectSpeedInsights();
-
 // middlewares 
 
 const app = express();
@@ -26,9 +22,7 @@ const corsConfig = {
 app.use(cors(corsConfig))
 
 // Routes
-app.use('/',()=>{
-  res.json({msg:'server is working on port :',port})
-})
+
 app.use('/user', userRoutes);
 app.use('/note', noteRoutes);
 
