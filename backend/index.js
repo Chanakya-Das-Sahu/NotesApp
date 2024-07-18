@@ -6,6 +6,9 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors')
 require('dotenv').config();
 const port = process.env.PORT || 3000;
+// import { injectSpeedInsights } from '@vercel/speed-insights';
+const {injectSpeedInsights} = require('@vercel/speed-insights')
+injectSpeedInsights();
 
 // middlewares 
 

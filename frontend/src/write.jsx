@@ -22,7 +22,7 @@
 //     }, [userId]);
 
 //     const handleSave = async () => {
-//         const res = await axios.post(`https://notesapp-roks.onrender.com/note/create`, data, {
+//         const res = await axios.post(`https://notes-app-phi-lac.vercel.app/note/create`, data, {
 //             headers: {
 //                 'Authorization': Token,
 //             },
@@ -87,7 +87,7 @@ const Write = () => {
     }, [userId]);
 
     const handleSave = async () => {
-        const res = await axios.post(`https://notesapp-roks.onrender.com/note/create`, data, {
+        const res = await axios.post(`https://notes-app-phi-lac.vercel.app/note/create`, data, {
             headers: {
                 'Authorization': Token,
             },

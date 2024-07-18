@@ -16,7 +16,7 @@ const Edit = () => {
     useEffect(() => {
         const getData = async () => {
             console.log(noteId);
-            const res = await axios.get(`https://notesapp-roks.onrender.com/note/get/${noteId}`, {
+            const res = await axios.get(`https://notes-app-phi-lac.vercel.app/note/get/${noteId}`, {
                 headers: {
                     'Authorization': Token,
                 }
@@ -33,7 +33,7 @@ const Edit = () => {
     }, []);
 
     const handleEdit = async () => {
-        const res = await axios.put(`https://notesapp-roks.onrender.com/note/edit/${noteId}`, data, {
+        const res = await axios.put(`https://notes-app-phi-lac.vercel.app/note/edit/${noteId}`, data, {
             headers: {
                 'Authorization': Token,
             }

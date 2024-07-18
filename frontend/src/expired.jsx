@@ -21,7 +21,7 @@ const Expired = ({ setLogin }) => {
     const handleLogin = async () => {
         try {
 
-            const res = await axios.post('https://notesapp-roks.onrender.com/user/login', data);
+            const res = await axios.post('https://notes-app-phi-lac.vercel.app/user/login', data);
 
             if (res.data.msg == 'found') {
              

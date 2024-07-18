@@ -11,7 +11,7 @@ const Signup = ({ setSignup, setLogin }) => {
 
     const handleSignup = async () => {
         try {
-            const res = await axios.post('https://notesapp-roks.onrender.com/user/signup', data);
+            const res = await axios.post('https://notes-app-phi-lac.vercel.app/user/signup', data);
 
             if (res.data.msg === 'found') {
                 setExist(true);

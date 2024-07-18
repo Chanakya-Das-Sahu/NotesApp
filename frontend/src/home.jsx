@@ -17,7 +17,7 @@ const Home = () => {
   const Token = localStorage.getItem('token');
   
   const getData = async () => {
-    const res = await axios.get(`https://notesapp-roks.onrender.com/note/getAll/${userId}`, {
+    const res = await axios.get(`https://notes-app-phi-lac.vercel.app/note/getAll/${userId}`, {
       headers: {
         'Authorization': Token,
       }
@@ -40,7 +40,7 @@ const Home = () => {
   };
 
   const handleDelete = async (e, id) => {
-    await axios.delete(`https://notesapp-roks.onrender.com/note/delete/${id}`, {
+    await axios.delete(`https://notes-app-phi-lac.vercel.app/note/delete/${id}`, {
       headers: {
         'Authorization': Token,
       }
