@@ -84,10 +84,12 @@ const Expired = ({ setLogin }) => {
 
     return (
         <>
-            <div id='container'>
+            <div id='container' className='m-auto border w-[500px] h-[500px]'>
                 <h1 style={{color:'#e14d4d',border:'2px solid #e14d4d',borderRadius:'5px',padding:'5px'}}>Your Session Has Been Expired !</h1>
-                <img src={logo} id='login-logo'></img>
-                {showAlert &&
+                <img src={logo} id='login-logo' className='m-auto'></img>
+               
+                <div className='inputs gap-[10px] flex flex-col mx-[100px]'>
+                     {showAlert &&
                     <div id='red'>
                         Email or Password is wrong
                     </div>
@@ -97,14 +99,16 @@ const Expired = ({ setLogin }) => {
                     <lable className='lable'>Enter Your Email : </lable>
 
                 }
-                <input type="text" placeholder='email' name="email" onChange={(e) => { setData({ ...data, [e.target.name]: e.target.value }) }} />
+                      <input type="text" className='charu' placeholder='email' name="email" onChange={(e) => { setData({ ...data, [e.target.name]: e.target.value }) }} />
                 {isPassword ?
                     <lable className='lable' style={{ color: 'red' }} >{isPassword}</lable> :
                     <lable className='lable'>Enter Your Password</lable>
 
                 }
-                <input type="text" placeholder='password' name="password" onChange={(e) => { setData({ ...data, [e.target.name]: e.target.value }) }} />
+                <input type="text" className='charu' placeholder='password' name="password" onChange={(e) => { setData({ ...data, [e.target.name]: e.target.value }) }} />
                 <button onClick={validateForm}>Login</button>
+                </div>
+              
             </div>
         </>
 

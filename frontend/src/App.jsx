@@ -9,7 +9,8 @@ import Edit from './edit.jsx';
 import Expired from './expired.jsx';
 const App = () =>{
   return(
-     <BrowserRouter>
+     <BrowserRouter>  
+     
     <Routes>
       <Route path='/' element={<Dash/>}></Route>
       <Route path='/home' element={<Home/>}></Route>
@@ -20,6 +21,7 @@ const App = () =>{
       <Route path='/expired' element={<Expired/>}></Route>
     </Routes>
    </BrowserRouter>
+  
   )
 }
 

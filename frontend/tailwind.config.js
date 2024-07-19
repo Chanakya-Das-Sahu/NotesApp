@@ -4,9 +4,13 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}"
   ],
-  theme: {
-    extend: {},
+ theme: {
+    screens: {
+      xs:'476px',
+      sm: '476px', // Adjust breakpoint values here
+      md: '476px',
+      // ... other breakpoints
+    }
   },
   plugins: [],
 }
-

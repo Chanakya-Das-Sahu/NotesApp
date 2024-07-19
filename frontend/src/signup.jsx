@@ -2,23 +2,27 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import logo from './logo.png';
 import cross from './cross.png';
-
+import loadingImage from './loading.gif'
 const Signup = ({ setSignup, setLogin }) => {
     const [data, setData] = useState({ email: '', password: '' });
     const [exist, setExist] = useState(false);
-    const [isEmail, setIsEmail] = useState('');
-    const [isPassword, setIsPassword] = useState('');
+    const[vemail,setVemail] = useState('')
+    const[vpassword,setVpassword] = useState('')
+    const[loading,setLoading] = useState(false)
 
     const handleSignup = async () => {
+        setLoading(true)
         try {
             const res = await axios.post('https://notes-app-phi-lac.vercel.app/user/signup', data);
 
             if (res.data.msg === 'found') {
                 setExist(true);
+                setLoading(false)
             }
             if (res.data.msg === 'created') {
                 setSignup(false);
                 setLogin(true);
+                setLoading(false)
             }
 
         } catch (err) {
@@ -31,36 +35,38 @@ const Signup = ({ setSignup, setLogin }) => {
     };
 
     const validateForm = () => {
-        let checked = true;
-        if (!checkEmail(data.email.trim())) {
-            checked = false;
-            setIsEmail('Please Enter Valid Email');
-        } else {
-            setIsEmail('');
+      
+
+    
+      //  Email Validation :
+
+        if(data.email==''){
+            setVemail('Please Enter Email : ')
+            console.log('please email')
+        }else{
+            const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+            if(regex.test(data.email)){
+            setVemail('')
+            }else{
+                 setVemail('Please Enter Valid Email : ')
+            }
         }
 
-        if (!data.email.trim()) {
-            checked = false;
-            setIsEmail('Please Enter Email');
-        }
+     //   Password Validation :
 
-        if (!data.password.trim()) {
-            checked = false;
-            setIsPassword('Please Enter Password');
-        } else {
-            setIsPassword('');
-        }
+       if(data.password==''){
+            setVpassword('Please Enter Password : ')
+            }else{
+            setVpassword('')
+            }
 
-        if (checked) {
-            handleSignup();
+
+        if(!vemail && !vpassword){
+             handleSignup()
         }
     };
 
-    const checkEmail = (email) => {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-    };
-
+   
     return (
         <div className="border-2 border-[#7761a7] rounded-lg flex flex-col p-5 gap-5 w-[300px] h-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-teal-400">
             <img src={cross} className="w-5 absolute top-[5%] right-[5%] cursor-pointer" onClick={handleCut} />
@@ -70,11 +76,8 @@ const Signup = ({ setSignup, setLogin }) => {
                     This email already exists
                 </div>
             )}
-            {isEmail ? (
-                <label className="text-red-500 font-light">{isEmail}</label>
-            ) : (
-                <label className="text-[#7761a7] font-light">Enter Your Email</label>
-            )}
+           
+            <label className='text-[red]'>{vemail}</label>
             <input
                 type="text"
                 placeholder="email"
@@ -82,11 +85,8 @@ const Signup = ({ setSignup, setLogin }) => {
                 className="h-6 rounded-lg border-2 border-[#7761a7] p-1"
                 onChange={(e) => { setData({ ...data, [e.target.name]: e.target.value }) }}
             />
-            {isPassword ? (
-                <label className="text-red-500 font-light">{isPassword}</label>
-            ) : (
-                <label className="text-[#7761a7] font-light">Enter Your Password</label>
-            )}
+           
+            <lable className='text-[red]'>{vpassword}</lable>
             <input
                 type="password"
                 placeholder="password"
@@ -94,9 +94,15 @@ const Signup = ({ setSignup, setLogin }) => {
                 className="h-6 rounded-lg border-2 border-[#7761a7] p-1"
                 onChange={(e) => { setData({ ...data, [e.target.name]: e.target.value }) }}
             />
-            <button className="bg-[#7761a7] rounded-2xl h-12 text-white mt-5" onClick={validateForm}>
+            {loading ?
+                  <img src={loadingImage} width='100px' className='mx-auto'/>
+:
+  <button className="bg-[#7761a7] rounded-2xl h-12 text-white mt-5" onClick={validateForm}>
                 Signup
             </button>
+            }
+          
+          
         </div>
     );
 };

@@ -249,7 +249,7 @@ const Dash = () => {
                         <p className="text-[#7761a7] text-center">Share your notes with friends and collaborate on projects effortlessly.</p>
                     </div>
                 </div>
-                <p className="text-white text-[13px] text-center mt-[140px]">&copy; 2024 Chanakya Das Sahu</p>
+                <a className="text-white text-[13px] text-center mt-[140px]" href='https://chanakya-das-sahu.netlify.app'>&copy; 2024 Chanakya Das Sahu</a>
             </div>
             {signup && <Signup setSignup={setSignup} setLogin={setLogin} />}
             {login && <Login setLogin={setLogin} />}

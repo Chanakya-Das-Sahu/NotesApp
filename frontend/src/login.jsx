@@ -3,19 +3,25 @@ import axios from 'axios';
 import logo from './logo.png';
 import cross from './cross.png';
 import { useDispatch } from 'react-redux';
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { addUserEmail, addUserId } from './slice';
-
+import loadingImage from './loading.gif'
 const Login = ({ setLogin }) => {
     const [data, setData] = useState({ email: '', password: '' });
     const [showAlert, setShowAlert] = useState(false);
-    const [isEmail, setIsEmail] = useState('');
-    const [isPassword, setIsPassword] = useState('');
+    const [vemail, setVemail] = useState('');
+    const [vpassword, setVpassword] = useState('');
+    const [loading, setLoading] = useState(false)
     const dispatch = useDispatch();
 
     const handleLogin = async () => {
+        setLoading(true)
         try {
             const res = await axios.post('https://notes-app-phi-lac.vercel.app/user/login', data);
+
+            if (res) {
+                setLoading(false)
+            }
 
             if (res.data.msg === 'found') {
                 localStorage.setItem('token', JSON.stringify(res.data.token));
@@ -36,35 +42,39 @@ const Login = ({ setLogin }) => {
     };
 
     const validateForm = async () => {
-        let checked = true;
-        if (!checkEmail(data.email.trim())) {
-            checked = false;
-            setIsEmail('Please Enter Valid Email');
+
+        // Email Validation :
+
+        if (data.email == '') {
+            setVemail('Please Enter Email : ')
         } else {
-            setIsEmail('');
+            if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) {
+                setVemail('')
+            } else {
+                setVemail('Please Enter Valid Email : ')
+            }
         }
 
-        if (!data.email.trim()) {
-            checked = false;
-            setIsEmail('Please Enter Email');
-        }
+        // Password Validation :
 
-        if (!data.password.trim()) {
-            checked = false;
-            setIsPassword('Please Enter Password');
+        if (data.password == '') {
+            setVpassword('Please Enter Password : ')
         } else {
-            setIsPassword('');
+            setVpassword('')
+        }
+        //  setTimeout(()=>{
+        //   console.log('data',data)
+        //   console.log('vp',vemail,vpassword)
+        //  },1000)
+        if (!vemail && !vpassword) {
+            handleLogin()
+            console.log('data',data)
+              console.log('vp',vemail,vpassword)
         }
 
-        if (checked) {
-            handleLogin();
-        }
     };
 
-    const checkEmail = (email) => {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-    };
+
 
     return (
         <div className="border-2 border-[#7761a7] rounded-lg flex flex-col p-5 gap-5 w-[300px] h-auto absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-teal-400">
@@ -75,19 +85,16 @@ const Login = ({ setLogin }) => {
                     Email or Password is wrong
                 </div>
             )}
-            {isEmail ? (
-                <label className="text-red-500 font-light text-2xl">{isEmail}</label>
-            ) : (
-                <label className="text-[#7761a7] font-light text-2xl">Enter Your Email:</label>
-            )}
+            <label className='text-[red]'>{vemail}</label>
             <input type="text" placeholder="email" name="email" className="h-6 rounded-lg border-2 border-[#7761a7] p-1" onChange={(e) => { setData({ ...data, [e.target.name]: e.target.value }) }} />
-            {isPassword ? (
-                <label className="text-red-500 font-light text-2xl">{isPassword}</label>
-            ) : (
-                <label className="text-[#7761a7] font-light text-2xl">Enter Your Password</label>
-            )}
+            <label className='text-[red]'>{vpassword}</label>
             <input type="password" placeholder="password" name="password" className="h-6 rounded-lg border-2 border-[#7761a7] p-1" onChange={(e) => { setData({ ...data, [e.target.name]: e.target.value }) }} />
-            <button className="bg-[#7761a7] rounded-2xl h-12 text-white mt-5" onClick={validateForm}>Login</button>
+            {loading ?
+                <img src={loadingImage} width='100px' className='mx-auto' />
+                :
+                <button className="bg-[#7761a7] rounded-2xl h-12 text-white mt-5" onClick={validateForm}>Login</button>
+            }
+
         </div>
     );
 };

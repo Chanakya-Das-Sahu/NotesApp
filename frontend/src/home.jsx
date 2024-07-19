@@ -8,11 +8,12 @@ import { store } from './store.js';
 import { addNoteId, flush } from './slice.js';
 import { useDispatch } from 'react-redux';
 import plus from './plus.png';
-
+import loading from './loading.gif'
 const Home = () => {
-  const [list, setList] = useState([]);
+  const [list, setList] = useState('');
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const[deleting,setDeleting] = useState(false)
   const userId = store.getState().user.detail.userId;
   const Token = localStorage.getItem('token');
   
@@ -25,8 +26,11 @@ const Home = () => {
     if (res.data.alert) {
       dispatch(flush());
       navigate('/expired');
-    } else if (res.data.notes) {
+    } 
+    console.log('res.data.notes:',res.data.notes)
+    if (res.data.notes) {
       setList(res.data.notes);
+      setDeleting(false)
     }
   };
 
@@ -40,13 +44,14 @@ const Home = () => {
   };
 
   const handleDelete = async (e, id) => {
+    setDeleting(true)
     await axios.delete(`https://notes-app-phi-lac.vercel.app/note/delete/${id}`, {
       headers: {
         'Authorization': Token,
       }
     });
     getData();
-    e.preventDefault();
+    // e.preventDefault();
   };
 
   const handleWrite = () => {
@@ -54,40 +59,45 @@ const Home = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-[#7761a7] to-[#19b698] flex flex-col items-center justify-center ">
-      <div className="chanakya border-8 border-[#7761a7] mx-auto w-[740px] h-[600px] rounded-2xl flex flex-wrap p-5 gap-2.5 overflow-auto text-xl max-w-full">
-        {list.length === 0 ? (
+    <div className="py-[20px] bg-gradient-to-br from-[#7761a7] to-[#19b698] flex flex-col items-center justify-center ">
+             <div className="chanakya border-8 border-[#7761a7] mx-auto w-[740px] h-[600px] rounded-2xl flex flex-wrap p-5 gap-2.5 overflow-auto text-xl max-w-full">
+      <div className=" w-full h-[200px] flex flex-col justify-center items-center bg-white rounded-lg shadow-md mb-5 sm:w-[200px]" onClick={handleWrite} ><img src={plus} width="50px"/></div>
+
+        {list=== '' ? 
           <div className="flex flex-col items-center justify-center h-full">
-            <h1 className="text-white text-4xl mb-5">No Notes Yet</h1>
-            <p className="text-white text-lg">Start writing your thoughts and ideas!</p>
+            <img src={loading} className='m-auto' width='300px' />
           </div>
-        ) : (
+         : (list.length>0 ?
+          
           list.map((ele) => (
-            <div key={ele._id} className=" w-[200px] h-[200px] bg-white rounded-lg shadow-md mb-5">
+            <div key={ele._id} className=" w-full h-[200px] bg-white rounded-lg shadow-md mb-5 sm:w-[200px]">
               <div className="flex justify-between items-center p-3 border-b border-gray-300">
-                <h2 className="text-xl font-bold">{ele.title}</h2>
+                <h2 className="text-xl font-bold w-[150px] h-[30px] overflow-auto scroll">{ele.title}</h2>
                 <div className="flex gap-3">
                   <img src={editImg} width="20px" onClick={() => handleEdit(ele._id)} className="cursor-pointer" />
                   <img src={deleteImg} width="20px" onClick={(e) => handleDelete(e, ele._id)} className="cursor-pointer" />
                 </div>
               </div>
-              <div className="p-3 w-full h-[150px] overflow-auto scroll">
+              <div className="p-3 w-full h-[140px] overflow-auto scroll">
                 <p>{ele.content}</p>
               </div>
             </div>
           ))
+          :
+          <div className="flex flex-col items-center justify-center h-full">
+            <h1 className="text-white text-4xl mb-5">No Notes Yet</h1>
+            <p className="text-white text-lg">Start writing your thoughts and ideas!</p>
+          </div>
+
+
         )}
-        {/* <button onClick={handleWrite} className=''>
-          <img src={plus} width="30px" className="mr-2" />
-        </button> */}
-        <button
-  onClick={handleWrite}
-  className="fixed bottom-10 right-10 sm:bottom-5  hover:scale-110 transition-transform durration-100 text-white text-2xl rounded-full "
-  
->
-  <img src={plus} width="50px" className="mr-2" />
-</button>
+       
       </div>
+       {deleting &&
+      <div className='relative bottom-[700px] left-[10px] w-[700px] h-[700px] flex flex-col justify-center items-center'>
+      <img src={loading} className='m-auto' width='300px' />
+      </div>
+}
     </div>
   );
 }
