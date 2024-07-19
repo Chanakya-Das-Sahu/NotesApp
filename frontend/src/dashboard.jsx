@@ -198,14 +198,14 @@ const Dash = () => {
                             <div className="text-white text-lg cursor-pointer hover:text-gray-200" onClick={handleLogin}>
                                 Login
                             </div>
-                            <div className="flex items-center bg-white text-gray-800 border border-teal-400 rounded-lg p-2 shadow-md hover:bg-gray-100 cursor-pointer">
+                            {/* <div className="flex items-center bg-white text-gray-800 border border-teal-400 rounded-lg p-2 shadow-md hover:bg-gray-100 cursor-pointer">
                                 <img src={google} alt="Google" className="w-6 h-6 mr-2" />
                                 <span className="text-lg">Google</span>
                             </div>
                             <div className="flex items-center bg-white text-gray-800 border border-teal-400 rounded-lg p-2 shadow-md hover:bg-gray-100 cursor-pointer">
                                 <img src={fb} alt="Facebook" className="w-6 h-6 mr-2" />
                                 <span className="text-lg">Facebook</span>
-                            </div>
+                            </div> */}
                         </div>
                     )}
                 </div>
@@ -227,7 +227,7 @@ const Dash = () => {
                         }
                     </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full mt-10">
+                <div className="px-[15px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 w-full mt-10 ">
                     <div className="bg-white rounded-lg shadow-md p-6 flex flex-col items-center justify-center transition duration-300 hover:shadow-lg">
                         <img src={logo} alt="Organize" className="w-16 h-16 mb-4" />
                         <h2 className="text-xl font-bold mb-2">Organize Your Notes</h2>

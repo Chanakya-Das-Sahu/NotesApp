@@ -59,15 +59,18 @@ const Home = () => {
   };
 
   return (
-    <div className="py-[20px] bg-gradient-to-br from-[#7761a7] to-[#19b698] flex flex-col items-center justify-center ">
-             <div className="chanakya border-8 border-[#7761a7] mx-auto w-[740px] h-[600px] rounded-2xl flex flex-wrap p-5 gap-2.5 overflow-auto text-xl max-w-full">
-      <div className=" w-full h-[200px] flex flex-col justify-center items-center bg-white rounded-lg shadow-md mb-5 sm:w-[200px]" onClick={handleWrite} ><img src={plus} width="50px"/></div>
-
-        {list=== '' ? 
-          <div className="flex flex-col items-center justify-center h-full">
-            <img src={loading} className='m-auto' width='300px' />
+    <div className="py-[50px] bg-gradient-to-br from-[#7761a7] to-[#19b698] flex flex-col items-center justify-center h-full">
+             <div className="chanakya border-8 border-[#7761a7] mx-auto w-[740px] h-[600px] rounded-2xl flex flex-wrap p-5 gap-2.5 overflow-auto text-xl max-w-full mx-[20px]">
+           {list=== '' ? 
+          <div className="flex flex-col items-center justify-center h-full w-full">
+            <img src={loading} className='mx-auto' width='300px' />
           </div>
-         : (list.length>0 ?
+         : 
+        <>
+          <div className="w-full h-[200px] flex flex-col justify-center items-center bg-white rounded-lg shadow-md mb-5 sm:w-[200px]" onClick={handleWrite} ><img src={plus} width="50px"/></div>
+
+  
+         {list.length>0 ?
           
           list.map((ele) => (
             <div key={ele._id} className=" w-full h-[200px] bg-white rounded-lg shadow-md mb-5 sm:w-[200px]">
@@ -90,7 +93,10 @@ const Home = () => {
           </div>
 
 
-        )}
+        }
+    
+      </>
+        }
        
       </div>
        {deleting &&
