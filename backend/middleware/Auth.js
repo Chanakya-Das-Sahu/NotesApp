@@ -1,5 +1,4 @@
 const jwt = require('jsonwebtoken')
-// const { jwtDecode } = require('jwt-decode')
 const User = require('../models/User.js')
 const auth = (req, res, next) => {
     const token = JSON.parse(req.headers.authorization);
@@ -7,15 +6,15 @@ const auth = (req, res, next) => {
     if (token) {
         let userDetail 
         try{
-        userDetail = jwt.verify(token, 'your_secret_key')
-       
-        // console.log(userDetail)
+       userDetail = jwt.decode(token)
+        console.log(userDetail)   
         const id = userDetail.id
         const checked = User.find({ id })
         if (checked) {
             next()
         }
          }catch(err){
+            console.log('ch error',err)
           res.json({alert:'expired'})
         }
     }
