@@ -18,7 +18,7 @@ const Home = () => {
   const Token = localStorage.getItem('token');
   
   const getData = async () => {
-    const res = await axios.get(`http://localhost:3000/note/getAll/${userId}`, {
+    const res = await axios.get(`https://notes-app-phi-lac.vercel.app/note/getAll/${userId}`, {
       headers: {
         'Authorization': Token,
       }
@@ -45,7 +45,7 @@ const Home = () => {
 
   const handleDelete = async (e, id) => {
     setDeleting(true)
-    await axios.delete(`http://localhost:3000/note/delete/${id}`, {
+    await axios.delete(`https://notes-app-phi-lac.vercel.app/note/delete/${id}`, {
       headers: {
         'Authorization': Token,
       }
