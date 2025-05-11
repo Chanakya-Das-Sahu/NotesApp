@@ -18,8 +18,8 @@ const corsConfig = {
 }
 
 
-
-app.use(cors(corsConfig))
+app.use(cors());
+// app.use(cors(corsConfig))
 
 // Routes
 
